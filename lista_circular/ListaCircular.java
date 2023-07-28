@@ -71,9 +71,8 @@ public class ListaCircular<T> {
         }
       
         if (atual.getInfo() == info) {
-            ex.setProximo(atual.getProximo());
-            ref = ex;
-            tamanho--;
+            ref = null;
+            tamanho = 0;
         }
     }
 
