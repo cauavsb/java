@@ -12,7 +12,7 @@ public class TesteListaEncadeada {
         lista.adicionarOrdenado(999);
         lista.adicionarOrdenado(0);
         lista.adicionarOrdenado(18);
-        lista.remover(99);
+        lista.remover(1);
         lista.imprimir();
     }
 }
