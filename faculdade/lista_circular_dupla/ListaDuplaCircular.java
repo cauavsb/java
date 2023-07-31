@@ -73,7 +73,7 @@ public class ListaDuplaCircular<T> {
 
     public void remover(int elemento) {
         if (listaVazia()) {
-            System.out.println("A lista está vazia!");
+            return;
         }
         else if (tamanho == 1) {
             if (elemento == ref.getInfo()) {
@@ -85,16 +85,23 @@ public class ListaDuplaCircular<T> {
             }
         }
         else {
-            No auxiliarAntes = ref;
             No auxiliar = ref.getDepois();
-            if (elemento == ref.getInfo()) {
-                ref.getAntes().setDepois(auxiliar);
-                auxiliar.setAntes(ref.getAntes());
-                ref = auxiliar;
-                tamanho--;
+            while (auxiliar != ref) {
+                if (auxiliar.getInfo() == elemento) {
+                    auxiliar.getAntes().setDepois(auxiliar.getDepois());
+                    auxiliar.getDepois().setAntes(auxiliar.getAntes());
+                    tamanho--;
+                    if(auxiliar.getDepois().getInfo() != elemento) {
+                        break;
+                    }
+                }
+                auxiliar = auxiliar.getDepois();
             }
-            else if (elemento == ref.getAntes().getInfo()) {
-
+            if (ref.getInfo() == elemento) {
+                ref.getDepois().setAntes(ref.getAntes());
+                ref.getAntes().setDepois(ref.getDepois());
+                ref = ref.getDepois();
+                tamanho--;
             }
         }
     }

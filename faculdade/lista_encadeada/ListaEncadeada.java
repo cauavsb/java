@@ -17,8 +17,7 @@ public class ListaEncadeada<T> {
         }
         else {
             No novoNo = new No(elemento);
-            No aux = ref;
-            novoNo.setProx(aux);
+            novoNo.setProx(ref);
             ref = novoNo;
             tamanho++;
         }
@@ -29,32 +28,32 @@ public class ListaEncadeada<T> {
             return;
         }
 
-        else if (elemento == ref.getInfo()) {
-            ref = ref.getProx();
-            tamanho--;
+        else if (tamanho == 1) {
+            if (elemento == ref.getInfo()) {
+                ref = ref.getProx();
+                tamanho--;
+            }
         }
-
+        
         else {
             No anterior = ref;
             No atual = ref.getProx();
-            for(int i=0; i < tamanho - 1; i++) {
-                if (atual.getProx() != null) {
-                    if (atual.getInfo() == elemento) {
-                        anterior.setProx(atual.getProx());
-                        tamanho--;
-                        if (atual.getProx().getInfo() != elemento) {
-                            break;
-                        }
-                    }
-                    else {
-                        anterior = atual;
-                        atual = atual.getProx();
-                    }
-                }
-                else {
-                    anterior.setProx(null);
+            while (atual != null) {
+                if (atual.getInfo() == elemento) {
+                    anterior.setProx(atual.getProx());
                     tamanho--;
+                    if (atual.getProx().getInfo() != elemento) {
+                        if (ref.getInfo() == elemento) {
+                            ref = ref.getProx();
+                            tamanho--;
+                        }
+                        return;
+                    }
                 }
+                if (atual.getProx() == null && elemento == atual.getInfo()) {
+                    anterior.setProx(null);
+                }
+                atual = atual.getProx();
             }
         }
     }
@@ -82,29 +81,25 @@ public class ListaEncadeada<T> {
             if(elemento <= ref.getInfo()) {
                 novoNo.setProx(ref);
                 ref = novoNo;
-                tamanho ++;
+                tamanho++;
             }
 
             else {
                 No anterior = ref;
                 No atual = ref.getProx();
-                for(int i=0; i < tamanho - 1; i++) {
-                    if(atual != null) {
-                        if (elemento <= atual.getInfo()) {
-                            anterior.setProx(novoNo);
-                            novoNo.setProx(atual);
-                            tamanho++;
-                            break;
-                        }
-                        else {
-                            anterior = atual;
-                            atual = atual.getProx();
-                        }
+                while (atual != null) {
+                    if (elemento <= atual.getInfo()) {
+                        anterior.setProx(novoNo);
+                        novoNo.setProx(atual);
+                        tamanho++;
+                        return;
                     }
-                    
+                    else {
+                        anterior = atual;
+                        atual = atual.getProx();
+                    }
                 }
-                atual = novoNo;
-                anterior.setProx(atual);
+                anterior.setProx(novoNo);
                 tamanho++;
             }
         }
