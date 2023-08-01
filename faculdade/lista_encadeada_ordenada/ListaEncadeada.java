@@ -1,4 +1,4 @@
-package lista_encadeada;
+package lista_encadeada_ordenada;
 
 public class ListaEncadeada<T> {
     private No<T> ref;
@@ -9,21 +9,54 @@ public class ListaEncadeada<T> {
         this.tamanho = 0;
     }
 
-    public void adicionar(int elemento) {
+    public void adicionarOrdenado(int elemento) {
+        No novoNo = new No(elemento);
         if(listaVazia()) {
-            No novoNo = new No(elemento);
             ref = novoNo;
             tamanho++;
         }
+        
+        else if(tamanho == 1) {
+            if(elemento <= ref.getInfo()) {
+                novoNo.setProx(ref);
+                ref = novoNo;
+                tamanho++; 
+            }
+            else {
+                ref.setProx(novoNo);
+                tamanho++;
+            }   
+        }
+
         else {
-            No novoNo = new No(elemento);
-            novoNo.setProx(ref);
-            ref = novoNo;
-            tamanho++;
+            if(elemento <= ref.getInfo()) {
+                novoNo.setProx(ref);
+                ref = novoNo;
+                tamanho++;
+            }
+
+            else {
+                No anterior = ref;
+                No atual = ref.getProx();
+                while (atual != null) {
+                    if (elemento <= atual.getInfo()) {
+                        anterior.setProx(novoNo);
+                        novoNo.setProx(atual);
+                        tamanho++;
+                        return;
+                    }
+                    else {
+                        anterior = atual;
+                        atual = atual.getProx();
+                    }
+                }
+                anterior.setProx(novoNo);
+                tamanho++;
+            }
         }
     }
 
-    public void remover(int elemento) {
+    public void removerOrdenado(int elemento) {
         if(listaVazia()) {
             return;
         }
@@ -45,6 +78,11 @@ public class ListaEncadeada<T> {
                 if (atual.getProx().getInfo() == elemento) {
                     atual.setProx(atual.getProx().getProx());
                     tamanho--;
+                    if (atual.getProx() != null) {
+                        if (atual.getProx().getInfo() != elemento) {
+                        return;
+                        }
+                    } 
                 }
                 else {
                     atual = atual.getProx();

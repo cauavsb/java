@@ -1,4 +1,4 @@
-package lista_encadeada;
+package lista_encadeada_ordenada;
 
 public class TesteListaEncadeada {
     public static void main(String[] args) {
@@ -8,18 +8,18 @@ public class TesteListaEncadeada {
         System.out.println(lista.listaVazia()); // deve retornar true
 
         // Inserção em uma lista vazia 
-        lista.adicionar(5);
+        lista.adicionarOrdenado(5);
         System.out.println(lista.listaVazia()); // deve retornar false
 
         // Inserção em uma lista contendo pelo menos um elemento
-        lista.adicionar(2);
-        lista.adicionar(7);
+        lista.adicionarOrdenado(2);
+        lista.adicionarOrdenado(7);
         lista.imprimir();  // [2, 5, 7]
         
         // Removendo elementos
-        lista.remover(5);
-        lista.remover(7);
-        lista.remover(2);
+        lista.removerOrdenado(5);
+        lista.removerOrdenado(7);
+        lista.removerOrdenado(2);
         lista.imprimir();  // []
         
         // Testando se a lista está vazia após remoção de todss
@@ -27,39 +27,39 @@ public class TesteListaEncadeada {
         System.out.println(lista.getTamanho()); // 0
 
         // Adicionando após a lista ficar vazia
-        lista.adicionar(1);
-        lista.adicionar(3);
-        lista.adicionar(2);
+        lista.adicionarOrdenado(1);
+        lista.adicionarOrdenado(3);
+        lista.adicionarOrdenado(2);
         lista.imprimir(); // [1, 2, 3]
         System.out.println(lista.listaVazia()); // deve retornar false
         System.out.println(lista.getTamanho()); // 3
 
         // Removendo duplicadas no inicio
-        lista.adicionar(1);
-        lista.adicionar(1);
+        lista.adicionarOrdenado(1);
+        lista.adicionarOrdenado(1);
         lista.imprimir(); // [1, 1, 1, 2, 3]
-        lista.remover(1);
+        lista.removerOrdenado(1);
         lista.imprimir(); // [2, 3]
 
         // Removendo duplicadas no fim
-        lista.adicionar(3);
-        lista.adicionar(3);
+        lista.adicionarOrdenado(3);
+        lista.adicionarOrdenado(3);
         lista.imprimir(); // [2, 3, 3, 3]
-        lista.remover(3);
+        lista.removerOrdenado(3);
         lista.imprimir(); // [2]
 
         // Removendo duplicadas no meio
-        lista.adicionar(1);
-        lista.adicionar(3);
-        lista.adicionar(2);
-        lista.adicionar(2);
+        lista.adicionarOrdenado(1);
+        lista.adicionarOrdenado(3);
+        lista.adicionarOrdenado(2);
+        lista.adicionarOrdenado(2);
         lista.imprimir(); // [1, 2, 2, 2, 3]
-        lista.remover(2);
+        lista.removerOrdenado(2);
         lista.imprimir(); // [1, 3]
 
         // Removendo elementos que não estão na lista sem que a lista seja modificada
-        lista.remover(0);
-        lista.remover(9);
+        lista.removerOrdenado(0);
+        lista.removerOrdenado(9);
         lista.imprimir(); // [1, 3]
         System.out.println(lista.listaVazia()); // deve retornar false
         System.out.println(lista.getTamanho()); // 2
