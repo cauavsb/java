@@ -7,7 +7,7 @@ public class ListaDuplaCircular<T> {
         this.tamanho = 0;
     }
     
-    public void adicionar(int elemento) {
+    public void adicionarOrdenado(int elemento) {
         No<T> novoNo = new No<T>(elemento);
         if (listaVazia()) {
             novoNo.setAntes(novoNo);

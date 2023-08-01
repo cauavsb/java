@@ -6,10 +6,6 @@ public class ListaCircular<T> {
     public void ListaCircular() {
         this.ref = null;
     }
-    
-    public int getTamanho() {
-        return tamanho;
-    }
 
     public void adicionar(int info) {
         No novoNo = new No(info);
@@ -61,7 +57,7 @@ public class ListaCircular<T> {
                 atual = atual.getProximo();
                 tamanho--;
                 if (atual.getInfo() != info) {
-                    break;
+                    return;
                 }
             } 
             else {
@@ -71,8 +67,19 @@ public class ListaCircular<T> {
         }
       
         if (atual.getInfo() == info) {
-            ref = null;
-            tamanho = 0;
+            if (tamanho == 1) {
+                ref = null;
+                tamanho = 0;
+            }
+            else if (tamanho == 2) {
+                ref = atual.getProximo();
+                atual.getProximo().setProximo(ref);
+                tamanho--;
+            }
+            else {
+                ref = atual.getProximo();
+                tamanho--;
+            }
         }
     }
 
@@ -100,5 +107,16 @@ public class ListaCircular<T> {
         else {
             return false;
         }
+    }
+
+    public No<T> getRef() {
+        return ref;
+    }
+    public void setRef(No<T> ref) {
+        this.ref = ref;
+    }
+    
+    public int getTamanho() {
+        return tamanho;
     }
 }

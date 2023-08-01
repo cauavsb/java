@@ -27,17 +27,6 @@ public class ListaEncadeada<T> {
         if(listaVazia()) {
             return;
         }
-
-        else if (elemento == ref.getInfo()) {
-            while (elemento == ref.getInfo()) {
-                ref = ref.getProx();
-                tamanho--;
-                if (ref == null) {
-                    return;
-                }
-            }
-            return;
-        }
         
         else {
             No atual = ref;
@@ -48,6 +37,17 @@ public class ListaEncadeada<T> {
                 }
                 else {
                     atual = atual.getProx();
+                }
+            }
+            
+            if (ref.getInfo() == elemento) {
+                if (tamanho == 1) {
+                    ref = null;
+                    tamanho = 0;
+                }
+                else {
+                    ref = ref.getProx();
+                    tamanho--;
                 }
             }
         }

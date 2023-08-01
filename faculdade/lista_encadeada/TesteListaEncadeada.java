@@ -14,7 +14,7 @@ public class TesteListaEncadeada {
         // Inserção em uma lista contendo pelo menos um elemento
         lista.adicionar(2);
         lista.adicionar(7);
-        lista.imprimir();  // [2, 5, 7]
+        lista.imprimir();  // [7, 2, 5]
         
         // Removendo elementos
         lista.remover(5);
@@ -30,21 +30,21 @@ public class TesteListaEncadeada {
         lista.adicionar(1);
         lista.adicionar(3);
         lista.adicionar(2);
-        lista.imprimir(); // [1, 2, 3]
+        lista.imprimir(); // [2, 3, 1]
         System.out.println(lista.listaVazia()); // deve retornar false
         System.out.println(lista.getTamanho()); // 3
 
         // Removendo duplicadas no inicio
         lista.adicionar(1);
         lista.adicionar(1);
-        lista.imprimir(); // [1, 1, 1, 2, 3]
+        lista.imprimir(); // [1, 1, 2, 3, 1]
         lista.remover(1);
         lista.imprimir(); // [2, 3]
 
         // Removendo duplicadas no fim
         lista.adicionar(3);
         lista.adicionar(3);
-        lista.imprimir(); // [2, 3, 3, 3]
+        lista.imprimir(); // [3, 3, 2, 3]
         lista.remover(3);
         lista.imprimir(); // [2]
 
@@ -53,14 +53,14 @@ public class TesteListaEncadeada {
         lista.adicionar(3);
         lista.adicionar(2);
         lista.adicionar(2);
-        lista.imprimir(); // [1, 2, 2, 2, 3]
+        lista.imprimir(); // [2, 2, 3, 1, 2]
         lista.remover(2);
-        lista.imprimir(); // [1, 3]
+        lista.imprimir(); // [3, 1]
 
         // Removendo elementos que não estão na lista sem que a lista seja modificada
         lista.remover(0);
         lista.remover(9);
-        lista.imprimir(); // [1, 3]
+        lista.imprimir(); // [3, 1]
         System.out.println(lista.listaVazia()); // deve retornar false
         System.out.println(lista.getTamanho()); // 2
     }
