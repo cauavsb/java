@@ -67,6 +67,22 @@ public class ListaEncadeada<T> {
         }
     }
 
+    public void removerTopo(int elemento) {
+        if(listaVazia()) {
+            return;
+        }
+        
+        else if (tamanho == 1) {
+            ref = null;
+            tamanho = 0;
+        }
+
+        else {
+            ref = ref.getProx();
+            tamanho--;
+        }
+    }
+
     public void imprimir() {
         if (listaVazia()) {
             System.out.println("[]");

@@ -12,10 +12,47 @@ public class Pilha {
     }
 
     public void pop() {
-        pilha.remover(getTopo());
+        if (pilhaVazia()) {
+            System.out.println("[]");
+        }
+        else {
+            pilha.removerTopo(pilha.getRef().getInfo());
+        }
     }
 
-    public int getTopo() {
-        return pilha.getRef().getInfo();
+    public void topoPilha() {
+        if (pilhaVazia()) {
+            System.out.println("[]");
+        }
+        else {
+            
+            System.out.println(pilha.getRef().getInfo());
+        }
+    }
+
+    public void imprimir() {
+        if (pilhaVazia()) {
+            System.out.println("[]");
+        }
+        else {
+            No aux = pilha.getRef();
+            System.out.print("[");
+            while (aux != null) {
+                System.out.print(aux.getInfo());
+                aux = aux.getProx();
+                if (aux != null) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
+    }
+
+    public boolean pilhaVazia() {
+        return pilha.getTamanho() == 0;
+    }
+
+    public int tamanhoPilha() {
+        return pilha.getTamanho();
     }
 }
