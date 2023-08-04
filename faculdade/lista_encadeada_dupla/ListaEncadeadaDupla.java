@@ -77,7 +77,12 @@ public class ListaEncadeadaDupla {
                     }
                 }
                 else {
-                    aux = aux.getSucessor();
+                    if (info < aux.getSucessor().getInfo()) {
+                        return;
+                    }
+                    else {
+                        aux = aux.getSucessor();
+                    }
                 }
             }
 
