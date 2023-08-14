@@ -53,6 +53,9 @@ public class ListaEncadeadaDupla {
         if (listaVazia()) {
             System.out.println("A lista está vazia!");
         }
+        else if (info < ref.getInfo()) {
+            return;
+        }
         else {
             No aux = ref;
             while (aux.getSucessor() != null) {
@@ -77,7 +80,12 @@ public class ListaEncadeadaDupla {
                     }
                 }
                 else {
-                    aux = aux.getSucessor();
+                    if (info < aux.getSucessor().getInfo()) {
+                        return;
+                    }
+                    else {
+                        aux = aux.getSucessor();
+                    }
                 }
             }
 
