@@ -5,7 +5,7 @@ public class ArvoreBinaria<T> {
         this.raiz = null;
     }
 
-    public void adicionar(int info) {
+    public void adiciona(int info) {
         No<T> novoNo = new No<>(info);
         if (arvoreVazia()) {
             raiz = novoNo;
@@ -36,8 +36,8 @@ public class ArvoreBinaria<T> {
         }
     }
 
-    public void remover(int info) {
-        if (procurarElemento(info)) {
+    public void remove(int info) {
+        if (procuraElemento(info)) {
             No<T> paiAtual = null;
             No<T> atual = raiz;
             while (atual != null) {
@@ -68,8 +68,13 @@ public class ArvoreBinaria<T> {
                 }
             }
             else if (atual.getDireita() != null && atual.getEsquerda() == null || atual.getDireita() == null && atual.getEsquerda() != null) { // um filho
-                if (paiAtual == raiz) {
-                    raiz = atual;
+               if (atual == raiz) {
+                    if (raiz.getEsquerda() == null) {
+                        raiz = raiz.getDireita();
+                    }
+                    else {
+                        raiz = raiz.getEsquerda();
+                    }
                 }
                 else if (atual.getInfo() < paiAtual.getInfo()) {
                     if (atual.getEsquerda() != null) {
@@ -92,12 +97,18 @@ public class ArvoreBinaria<T> {
                 No<T> paiSucessor = atual;
                 No<T> sucessor = atual.getDireita();
                 while (sucessor.getEsquerda() != null) {
-                    paiSucessor = atual;
+                    paiSucessor = sucessor;
                     sucessor = sucessor.getEsquerda();
                 }
-                
+                    
                 atual.setInfo(sucessor.getInfo());
-                paiSucessor.setEsquerda(null);
+        
+                if (paiSucessor == atual) { // Caso o sucessor seja o filho à direita do nó atual
+                    paiSucessor.setDireita(sucessor.getDireita());
+                } 
+                else {
+                    paiSucessor.setEsquerda(sucessor.getDireita());
+                }
             }
         }
         else {
@@ -133,7 +144,7 @@ public class ArvoreBinaria<T> {
         return raiz == null;
     }
 
-    public Boolean procurarElemento(int info) {
+    public Boolean procuraElemento(int info) {
         if (arvoreVazia()) {
             return false;
         }
