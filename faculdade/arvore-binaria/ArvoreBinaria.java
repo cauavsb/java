@@ -105,9 +105,15 @@ public class ArvoreBinaria<T> {
         
                 if (paiSucessor == atual) { // Caso o sucessor seja o filho à direita do nó atual
                     paiSucessor.setDireita(sucessor.getDireita());
+                    //if (procuraElemento(10)) {
+                        //remove(10);
+                    //}
                 } 
                 else {
                     paiSucessor.setEsquerda(sucessor.getDireita());
+                    //if (procuraElemento(10)) {
+                        //remove(10);
+                    //}
                 }
             }
         }
