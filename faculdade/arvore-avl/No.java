@@ -2,20 +2,20 @@ public class No<T> {
     private int info;
     private No<T> esquerda;
     private No<T> direita;
-    private int fb;
+    private int alturaNo;
 
     public No(int info) {
         this.info = info;
         this.esquerda = null;
         this.direita = null;
-        this.fb = 0;
+        this.alturaNo = 1;
     }
 
-    public No(int info, No<T> esquerda, No<T> direita, int fb) {
+    public No(int info, No<T> esquerda, No<T> direita, int alturaNo) {
         this.info = info;
         this.esquerda = esquerda;
         this.direita = direita;
-        this.fb = fb;
+        this.alturaNo = alturaNo;
     }
 
     public int getInfo() {
@@ -36,10 +36,10 @@ public class No<T> {
     public void setDireita(No<T> direita) {
         this.direita = direita;
     }
-    public int getFb() {
-        return fb;
+    public int getAlturaNo() {
+        return alturaNo;
     }
-    public void setFb(int fb) {
-        this.fb = fb;
+    public void setAlturaNo(int alturaNo) {
+        this.alturaNo = alturaNo;
     }
 }
