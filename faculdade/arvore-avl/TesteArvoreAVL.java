@@ -12,10 +12,11 @@ public class TesteArvoreAVL {
         arvoreAVL.adiciona(7);
         arvoreAVL.adiciona(6);
         arvoreAVL.adiciona(9);
+
         System.out.println("Raiz da árvore: " + arvoreAVL.getRaiz().getInfo());
         System.out.print("Em ordem: ");
         arvoreAVL.emOrdem(arvoreAVL.getRaiz());
-        System.out.println(arvoreAVL.alturaNo(arvoreAVL.getRaiz()));
+        System.out.println();
         System.out.println(arvoreAVL.arvoreCompleta(arvoreAVL.getRaiz()));
         System.out.println();
 
@@ -24,8 +25,7 @@ public class TesteArvoreAVL {
         System.out.println("Raiz da árvore: " + arvoreAVL.getRaiz().getInfo());
         System.out.print("Em ordem: ");
         arvoreAVL.emOrdem(arvoreAVL.getRaiz());
-        System.out.println(arvoreAVL.alturaNo(arvoreAVL.getRaiz()));
-        System.out.println(arvoreAVL.arvoreCompleta(arvoreAVL.getRaiz()));
         System.out.println();
+        System.out.println(arvoreAVL.arvoreCompleta(arvoreAVL.getRaiz()));
     }
 }
