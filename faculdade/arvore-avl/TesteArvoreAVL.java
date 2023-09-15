@@ -2,6 +2,7 @@ public class TesteArvoreAVL {
     public static void main (String[] args) {
     ArvoreAVL<Integer> arvoreAVL = new ArvoreAVL<>();
         arvoreAVL.adiciona(10);
+        arvoreAVL.getRaiz().getAlturaNo();
         arvoreAVL.adiciona(11);
         arvoreAVL.adiciona(10);
         arvoreAVL.adiciona(18);
