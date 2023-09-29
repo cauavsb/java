@@ -7,10 +7,9 @@ public class Fila<T> {
         this.fim = null;
     }
 
-    public void insere(String info) {
-        No<T> novoNo = new No<>(info);
+    public void insere(T elemento) {
+        No<T> novoNo = new No<>(elemento);
         if (filaVazia()) {
-            novoNo.setProx(null);
             inicio = novoNo;
             fim = novoNo;
         }
@@ -22,7 +21,7 @@ public class Fila<T> {
 
     public void remove() {
         if (filaVazia()) {
-            System.out.println("Fila vazia!");
+            System.out.println("A fila está vazia!");
         }
         else if (inicio == fim) {
             inicio = null;
@@ -35,16 +34,16 @@ public class Fila<T> {
 
     public void imprime() {
         if (filaVazia()) {
-            System.out.println("Fila vazia!");
+            System.out.println("FILA VAZIA");
         }
         else {
-            No<T> aux = inicio;
+            No<T> atual = inicio;
             System.out.print("[");
-            while (aux.getProx() != null) {
-                System.out.print(aux.getInfo() + " -> ");
-                aux = aux.getProx();
+            while (atual.getProx() != null) {
+                System.out.print(atual.getElemento() + ", ");
+                atual = atual.getProx();
             }
-            System.out.println(aux.getInfo() + "]");
+            System.out.println(atual.getElemento() + "]");
         }
     }
 
@@ -58,7 +57,6 @@ public class Fila<T> {
     public void setInicio(No<T> inicio) {
         this.inicio = inicio;
     }
-
     public No<T> getFim() {
         return fim;
     }
