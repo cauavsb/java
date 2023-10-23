@@ -157,14 +157,6 @@ public class AVL<T> {
         return "";
     }
 
-    public void emOrdem(No<T> atual) {
-        if (atual != null) {
-            emOrdem(atual.getEsquerda());
-            System.out.print(atual.getInfo() + " ");
-            emOrdem(atual.getDireita());
-        }
-    }
-
     public Boolean arvoreVazia() {
         return raiz == null;
     }
