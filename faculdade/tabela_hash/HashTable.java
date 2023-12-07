@@ -16,8 +16,30 @@ public class HashTable<T> {
         return letras;
     }
 
+    public String removerAcentos(String str) {
+        if (str == null) {
+            return null;
+        }
+
+        String semAcentos = str
+                .replaceAll("[áàâã]", "a")
+                .replaceAll("[éèê]", "e")
+                .replaceAll("[íìî]", "i")
+                .replaceAll("[óòôõ]", "o")
+                .replaceAll("[úùû]", "u")
+                .replaceAll("[ç]", "c")
+                .replaceAll("[ÁÀÂÃ]", "A")
+                .replaceAll("[ÉÈÊ]", "E")
+                .replaceAll("[ÍÌÎ]", "I")
+                .replaceAll("[ÓÒÔÕ]", "O")
+                .replaceAll("[ÚÙÛ]", "U")
+                .replaceAll("[Ç]", "C");
+
+        return semAcentos;
+    }
+
     public HashTable(int m) {
-        int num = m/20;
+        int num = m / 20;
         if (primoOuNao(num)) {
             meuVetor = new ListaEncadeada[num];
         }
@@ -27,40 +49,69 @@ public class HashTable<T> {
     }
 
     public void insere(String str) {
-        int local = hash(str);
+        String strSemAcento = removerAcentos(str);
+        int local = hash(strSemAcento);
 
         if (meuVetor[local] == null) {
             meuVetor[local] = new ListaEncadeada<>();
             meuVetor[local].adicionar(str);
+            System.out.println("A string " + str + " foi adicionada na posição " + local);
         }
         else {
             meuVetor[local].adicionar(str);
+            System.out.println("A string " + str + " foi adicionada na posição " + local);
         }
     }
 
     public void imprime(int p) {
-        if (meuVetor[p] != null) {
-            No<T> atual = meuVetor[p].getRef();
-            while (atual != null) {
-                System.out.println(atual.getInfo());
-                atual = atual.getProx();
-            }
+        if (meuVetor[p] == null) {
+            System.out.println("Não existe nada na posição " + p + ".");
         }
         else {
-            System.out.println("Não existe nada na posição " + p + ".");
+            meuVetor[p].imprimir();
         }
     }
     
-    //public boolean busca(String str) {
+    public boolean busca(String str) {
+        String strSemAcento = removerAcentos(str);
+        int local = hash(strSemAcento);
 
-    //}
+        if (meuVetor[local] == null) {
+            return false;
+        }
+        else if (meuVetor[local].getTamanho() == 0) {
+            return false;
+        }
+        else {
+            No<T> atual = meuVetor[local].getRef();
+            while (atual != null) {
+                if (atual.getInfo().equals(str)) {
+                    return true;
+                }
+                else {
+                    atual = atual.getProx();
+                }
+            }
+            
+            return false;
+        }
+    }
 
-    //public void remove(String str) {
-
-    //}
+    public void remove(String str) {
+        if (busca(str)) {
+            String strSemAcento = removerAcentos(str);
+            int local = hash(strSemAcento);
+            meuVetor[local].remover(str);
+            System.out.println("A string " + str + " foi removida.");
+        }
+        else {
+            System.out.println("Essa string não existe!");
+        }
+    }
 
     public int hash(String str) {
         String palavra = str.toUpperCase();
+        palavra = removerAcentos(palavra);
         int retorno = 0;
 
         for (int x = 0; x < str.length(); x++) {
@@ -87,7 +138,7 @@ public class HashTable<T> {
             return false;
         } 
         else if (num == 2) {
-            return true;
+            return false;
         } 
         else if (num % 2 == 0) {
             return false;

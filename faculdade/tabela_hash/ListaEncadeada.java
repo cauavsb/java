@@ -22,7 +22,7 @@ public class ListaEncadeada<T> {
     }
 
     public void remover(String elemento) {
-        if(listaVazia()) {
+        if (listaVazia()) {
             return;
         }
         
@@ -76,14 +76,14 @@ public class ListaEncadeada<T> {
     public No<T> getRef() {
         return ref;
     }
-    private void setRef(No<T> ref) {
+    public void setRef(No<T> ref) {
         this.ref = ref;
     }
     
     public int getTamanho() {
         return tamanho;
     }
-    private void setTamanho(int tamanho) {
+    public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
     }
 }
