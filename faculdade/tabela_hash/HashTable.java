@@ -1,56 +1,29 @@
 public class HashTable<T> {
     private ListaEncadeada[] meuVetor;
-    private Letra[] letras = retornaLetras();
-
-    public Letra[] retornaLetras() {
-        Letra[] letras = new Letra[27];
-
-        for (int i = 0; i < letras.length; i++) {
-            char letra = (char) ('A' + i);
-            int valor = 10 + i;
-            letras[i] = new Letra(String.valueOf(letra), valor);
-        }
-
-        letras[26] = new Letra(" ", 36);
-
-        return letras;
-    }
-
-    public String removerAcentos(String str) {
-        if (str == null) {
-            return null;
-        }
-
-        String semAcentos = str
-                .replaceAll("[áàâã]", "a")
-                .replaceAll("[éèê]", "e")
-                .replaceAll("[íìî]", "i")
-                .replaceAll("[óòôõ]", "o")
-                .replaceAll("[úùû]", "u")
-                .replaceAll("[ç]", "c")
-                .replaceAll("[ÁÀÂÃ]", "A")
-                .replaceAll("[ÉÈÊ]", "E")
-                .replaceAll("[ÍÌÎ]", "I")
-                .replaceAll("[ÓÒÔÕ]", "O")
-                .replaceAll("[ÚÙÛ]", "U")
-                .replaceAll("[Ç]", "C");
-
-        return semAcentos;
-    }
 
     public HashTable(int m) {
-        int num = m / 20;
-        if (primoOuNao(num)) {
-            meuVetor = new ListaEncadeada[num];
+        if (primoOuNao(m)) {
+            meuVetor = new ListaEncadeada[m];
         }
         else {
-            meuVetor = new ListaEncadeada[proximoPrimo(num)];
+            meuVetor = new ListaEncadeada[proximoPrimo(m)];
         }
+    }
+
+    public int hash(String str) {
+        int valor = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char caractere = str.charAt(i);
+            int valorAscii = (int) caractere;
+            
+            valor += valorAscii * (i + 1);
+        }
+
+        return valor % meuVetor.length;
     }
 
     public void insere(String str) {
-        String strSemAcento = removerAcentos(str);
-        int local = hash(strSemAcento);
+        int local = hash(str);
 
         if (meuVetor[local] == null) {
             meuVetor[local] = new ListaEncadeada<>();
@@ -63,18 +36,19 @@ public class HashTable<T> {
         }
     }
 
-    public void imprime(int p) {
-        if (meuVetor[p] == null) {
-            System.out.println("Não existe nada na posição " + p + ".");
+    public void remove(String str) {
+        if (busca(str)) {
+            int local = hash(str);
+            meuVetor[local].remover(str);
+            System.out.println("A string " + str + " foi removida.");
         }
         else {
-            meuVetor[p].imprimir();
+            System.out.println("Essa string não existe!");
         }
     }
     
     public boolean busca(String str) {
-        String strSemAcento = removerAcentos(str);
-        int local = hash(strSemAcento);
+        int local = hash(str);
 
         if (meuVetor[local] == null) {
             return false;
@@ -97,40 +71,19 @@ public class HashTable<T> {
         }
     }
 
-    public void remove(String str) {
-        if (busca(str)) {
-            String strSemAcento = removerAcentos(str);
-            int local = hash(strSemAcento);
-            meuVetor[local].remover(str);
-            System.out.println("A string " + str + " foi removida.");
+    public void imprime(int p) {
+        if (p < 0) {
+            System.out.println("O número passado não pode ser menor que 0.");
+        }
+        else if (p >= meuVetor.length) {
+            System.out.println("O número " + p + " excede o tamanho do vetor.");
+        }
+        else if (meuVetor[p] == null) {
+            System.out.println("Não existe nada na posição " + p + ".");
         }
         else {
-            System.out.println("Essa string não existe!");
+            meuVetor[p].imprimir();
         }
-    }
-
-    public int hash(String str) {
-        String palavra = str.toUpperCase();
-        palavra = removerAcentos(palavra);
-        int retorno = 0;
-
-        for (int x = 0; x < str.length(); x++) {
-            retorno += (encontrarPosicao(String.valueOf(palavra.charAt(x))) * Math.pow(20, (str.length() - (x+1))));
-        }
-
-        retorno = retorno % meuVetor.length;
-
-        return retorno;
-    }
-
-    public int encontrarPosicao(String letra) {
-        letra = letra.toUpperCase();
-        for (int i = 0; i < letras.length; i++) {
-            if (letras[i].getLetra().equals(letra)) {
-                return i + 10;
-            }
-        }
-        return -1;
     }
 
     public static boolean primoOuNao(int num) {
